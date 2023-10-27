@@ -15,7 +15,6 @@ tuple<double, string> weight_convert(int planet, double weight) {
     double Neptune = 11.15;
 
   if (planet < 0 || planet > 7) {
-    std::cout << "That's not a planet, you dummy!\n";
     return r;
   }
 
@@ -54,6 +53,17 @@ tuple<double, string> weight_convert(int planet, double weight) {
     return r;
 }
 
+bool cont() {
+        string ans = "N";
+        cout << "Do you want to continue (Y/N)?\n";
+        cin >> ans;
+        if ((ans == "Y") || (ans == "y") || (ans == "yes") || (ans == "Yes") || (ans == "YES")) {
+            return true;
+        }
+        else {
+            return false;
+        };
+    }
 
 int planets() {
   
@@ -63,17 +73,30 @@ int planets() {
     std::cin >> weight;
 
     int planet;
-    std::cout << "1 = Mercury\n2 = Venus\n3 = Mars\n4 = Jupiter\n5 = Saturn\n6 = Uranus\n7 = Netune\nOkay, nice! Choose a planet:\n";
+    std::cout << "1 = Mercury\n2 = Venus\n3 = Mars\n4 = Jupiter\n5 = Saturn\n6 = Uranus\n7 = Neptune\nOkay, nice! Choose a planet:\n";
     std::cin >> planet;
 
     tuple<double, string> result;
     result = weight_convert(planet, weight);
 
     if (get<1>(result) == "") {
+        std::cout << "That's not a planet, you dummy!\n";
+
+        bool _c = cont();
+        if (_c) {
+            planets();
+        }
+        
         return 0;
     }
 
-    std::cout << "Your weight on " << get<1>(result) << " is " << get<0>(result);
+    std::cout << "Your weight on " << get<1>(result) << " is " << get<0>(result) << " kg\n";
+
+    bool _c = cont();
+    if (_c) {
+        planets();
+    }
+
     return 0;
 }
 
